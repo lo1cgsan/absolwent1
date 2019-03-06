@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista absolwentów</title>
+</head>
+<body>
+    <h1>Lista absolwentów</h1>
+    <ul>
+    {% for osoba in osoby %}
+        <li>{{ osoba }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
