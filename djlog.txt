@@ -1,0 +1,104 @@
+1) jak zainstalować PyCharma?
+2) pobieramy Toolbox App, na Linuksie w formacie tar.gz
+3) rozpakuj pobrane archiwum
+4) zmień nazwę katalogu na: jetbrains-toolbox
+5) uruchom plik jetbrains-toolbox
+6) zainstaluj PyCharm Community
+7) utwórz repozytorium "absolwent" na github.com
+8) sklonuj repozytorium do katalogu domowego
+9) otwórz PyCHarma i dodaj nowy projekt ze środowiskiem wirtualnym
+w kakatalogu sklonowanego repozytorium
+10) ALT+F12 Terminal (venv)
+pip install Django (2.1.7)
+
+11) w terminalu w katalogu absolwent konfiguracja Gita:
+git config --local user.name lo1cgsan
+git config --local user.email lo1cgsan@gamil.com
+git config --local --list
+git pull
+Already up to date.
+
+12) django-admin.py startproject absolwent .
+13) python manage.py runserver
+http://127.0.0.1:8000/osoby/test
+http://mojadomena.edu.pl
+
+14) git status
+git add .gitignore
+git commit -m "plik gitignore"
+ALT+9
+
+15) python manage.py startapp osoby
+16) dodajemy do katalogu osoby plik: urls.py
+
+17)
+python manage.py migrate
+python manage.py makemigrations osoby
+python manage.py migrate
+
+18) python manage.py createsuperuser
+admin, zaq1@WSX
+
+19) adam, zaq1@WSX, Adam Kowalski, adam@home.net
+20) ewa, zaq1@WSX, Ewa Nowak, ewa@home.net
+
+21) python manage.py dbshell
+sqlite> .table
+
+nazwaaplikacji_absolwent
+SELECT * FROM auth_user;
+SELECT * FROM django_migrations;
+.quit
+
+22) python manage.py sqlmigrate osoby 0001
+
+23) ORM Django
+CRUD – Create
+
+python manage.py shell
+from django.contrib.auth.models import User
+from osoby.models import Klasa, Absolwent
+
+Klasa.objects.all()
+QuerySet
+k = Klasa(nazwa="3C", rok_naboru="2010", rok_matury="2013")
+k.save()
+k.id
+
+u = User.objects.create_user('przemek', 'przemek@home.net', 'zaq1@WSX')
+u.set_password('zaq1@WSX')
+
+a = Absolwent.objects.create(user = u, klasa = k)
+
+CRUD (Create, Read, Update, Delete)
+
+KWERENDY (read)
+klasy = Klasa.objects.all()
+for k in klasy:
+  k.nazwa
+
+Klasa.objects.get(pk=1)
+Klasa.objects.filter(nazwa='3A')
+Klasa.objects.exclude(nazwa='3A')
+
+Klasa.objects.filter(rok_naboru__gte=2015)
+Klasa.objects.filter(rok_naboru__gte=2010).exclude(nazwa='3A')
+
+Klasa.objects.filter(nazwa__startswith='3')
+Klasa.objects.filter(rok_naboru__startswith='2')
+Klasa.objects.filter(nazwa__endswith='B')
+Klasa.objects.filter(nazwa__contains='A')
+
+__gte >=
+__gt  >
+__lte <=
+__lt  <
+
+Klasa.objects.filter(rok_naboru__range=(2000, 2015))
+
+u = User.objects.filter(date_joined__year=2019, date_joined__month__gt=2)
+u.count()
+
+k = Klasa.objects.all().last()
+k.delete()
+(1, {'osoby.Klasa': 1})
