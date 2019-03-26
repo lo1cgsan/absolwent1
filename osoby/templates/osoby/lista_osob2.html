@@ -1,0 +1,19 @@
+{% extends 'szablon.html' %}
+
+{% block tytul %}
+    Abolwent – Aktualności
+{% endblock %}
+
+{% block tresc %}
+<div class="w-100 bg-primary p-4">
+    <h2 class="section-heading mb-4">
+        <span class="section-heading-upper">Nasi</span>
+        <span class="section-heading-lower">Absolwenci</span>
+    </h2>
+    <ol>
+        {% for o in osoby %}
+        <li class="mb-2"><span class="lead">{{ o }}, klasa {{ o.klasa }}</span></li>
+        {% endfor %}
+    </ol>
+</div>
+{% endblock %}
