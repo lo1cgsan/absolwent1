@@ -1,0 +1,23 @@
+{% extends 'szablon.html' %}
+
+{% block tytul %} Abolwent – Dodawanie wiadomości {% endblock %}
+{% block h1 %} Abolwent – Dodawanie wiadomości {% endblock %}
+
+{% block tresc %}
+<div class="w-100 bg-primary p-4 rounded">
+    {% if user.is_authenticated %}
+        {% if perms.wiadomosci.add_wiadomosc %}
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-secondary">Wyślij</button>
+            </form>
+        {% else %}
+            <div class="well">Nie możesz dodawać wiadomości!</div>
+        {% endif %}
+
+    {% else %}
+        <div class="well">Nie jesteś zalogowany!</div>
+    {% endif %}
+</div>
+{% endblock %}
