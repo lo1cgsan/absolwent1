@@ -1,0 +1,19 @@
+{% extends 'szablon.html' %}
+
+{% block tytul %}
+    Abolwent – Rejestracja
+{% endblock %}
+
+{% block tresc %}
+<div class="w-100 bg-primary p-4 rounded">
+    {% if user.is_authenticated %}
+        <p>Jeseteś zarejestrowany jako {{ user.username }}.</p>
+    {% else %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-secondary">Wyślij</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}
